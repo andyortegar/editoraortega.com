@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Editora Ortega</title>
+<meta name="description" content="Imprenta en Santo Domingo: tarjetas de presentación, volantes, brochures, stickers, tags, talonarios, bolsas personalizadas, banners y roll ups. Cotice por WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500;62..125,800;62..125,900&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Pliego de imprenta: marcas de corte y de registro enmarcan cada sección; el color de proceso (CMYK) aparece solo como marca, nunca como fondo. */
+:root {
+  --papel: #fbfbf9;
+  --tinta: #121417;
+  --tinta-2: #4b5157;
+  --filete: #dcdfe2;
+  --c: #00a0d2;   /* cian de proceso */
+  --m: #d6127a;   /* magenta de proceso */
+  --y: #f2c300;   /* amarillo de proceso */
+  --boton: #121417;
+  --boton-texto: #fbfbf9;
+  --f-display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --f-texto: "Source Sans 3", "Segoe UI", Roboto, Arial, sans-serif;
+  --f-dato: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --papel: #111315; --tinta: #eef0f1; --tinta-2: #a7aeb4; --filete: #2a2f33;
+    --c: #35c3ee; --m: #f0479a; --y: #ffd43b; --boton: #eef0f1; --boton-texto: #111315; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --papel: #111315; --tinta: #eef0f1; --tinta-2: #a7aeb4; --filete: #2a2f33;
+  --c: #35c3ee; --m: #f0479a; --y: #ffd43b; --boton: #eef0f1; --boton-texto: #111315; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0; background: var(--papel); color: var(--tinta);
+  font-family: var(--f-texto); font-size: 17px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.pliego { max-width: 1080px; margin: 0 auto; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--c); outline-offset: 3px; }
+
+/* Barra superior */
+.barra { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 18px; border-bottom: 1px solid var(--filete); }
+.marca { font-family: var(--f-display); font-weight: 900; font-stretch: 112%; letter-spacing: -0.01em; font-size: 1.15rem; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; }
+.registro { width: 22px; height: 22px; position: relative; flex: none; }
+.registro::before, .registro::after { content: ""; position: absolute; inset: 0; margin: auto; background: var(--tinta); }
+.registro::before { width: 100%; height: 1.5px; }
+.registro::after { width: 1.5px; height: 100%; }
+.registro i { position: absolute; inset: 4px; border: 1.5px solid var(--tinta); border-radius: 50%; }
+.barra nav { display: flex; gap: 18px; font-size: 15px; }
+.barra nav a { text-decoration: none; color: var(--tinta-2); }
+.barra nav a:hover { color: var(--tinta); }
+@media (max-width: 560px) { .barra nav { display: none; } }
+
+/* Portada */
+.portada { padding-block: clamp(40px, 8vw, 88px) clamp(36px, 6vw, 64px); display: grid; gap: 28px; }
+.etiqueta { font-family: var(--f-dato); font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--tinta-2); display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.tintas { display: inline-flex; gap: 4px; }
+.tintas i { width: 10px; height: 10px; border-radius: 50%; display: block; }
+h1 {
+  font-family: var(--f-display); font-weight: 900; font-stretch: 125%;
+  font-size: clamp(2.6rem, 1.2rem + 6.4vw, 6rem); line-height: .95; letter-spacing: -0.02em; margin: 0; text-wrap: balance;
+}
+/* El riesgo: la palabra clave impresa con un registro corrido, como un pliego mal calzado. */
+.corrido { position: relative; display: inline-block; color: var(--tinta); isolation: isolate; }
+.corrido::before, .corrido::after { content: attr(data-texto); position: absolute; left: 0; top: 0; z-index: -1; pointer-events: none; }
+.corrido::before { color: var(--c); transform: translate(-0.035em, 0.025em); }
+.corrido::after { color: var(--m); transform: translate(0.035em, -0.02em); }
+.portada p.bajada { font-size: clamp(1.05rem, .95rem + .5vw, 1.3rem); color: var(--tinta-2); max-width: 46ch; margin: 0; }
+.acciones { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.boton { display: inline-flex; align-items: center; gap: 10px; background: var(--boton); color: var(--boton-texto); text-decoration: none; font-weight: 600; padding: 14px 22px; border-radius: 999px; font-size: 1.05rem; }
+.boton:hover { background: color-mix(in srgb, var(--boton) 86%, var(--c)); }
+.boton svg { width: 20px; height: 20px; fill: currentColor; flex: none; }
+.secundario { font-weight: 600; text-decoration-thickness: 1.5px; text-underline-offset: 4px; }
+.numero { font-family: var(--f-dato); font-size: 14px; color: var(--tinta-2); }
+
+/* Secciones con marcas de corte */
+section.hoja { position: relative; padding: clamp(28px, 5vw, 48px) clamp(4px, 2vw, 24px); margin-block: 8px 40px; }
+section.hoja::before, section.hoja::after { content: ""; position: absolute; width: 18px; height: 18px; border-color: var(--tinta-2); border-style: solid; opacity: .55; }
+section.hoja::before { top: 0; left: 0; border-width: 1.5px 0 0 1.5px; }
+section.hoja::after { bottom: 0; right: 0; border-width: 0 1.5px 1.5px 0; }
+h2 { font-family: var(--f-display); font-weight: 800; font-stretch: 110%; font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.3rem); line-height: 1.05; margin: 0 0 8px; letter-spacing: -0.01em; text-wrap: balance; }
+.intro { color: var(--tinta-2); margin: 0 0 28px; max-width: 58ch; }
+
+/* Productos */
+.productos { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); border-top: 1px solid var(--filete); }
+.productos li { padding: 18px 4px 20px; border-bottom: 1px solid var(--filete); display: grid; grid-template-columns: auto 1fr; gap: 4px 16px; align-items: baseline; min-width: 0; }
+@media (min-width: 700px) { .productos li { padding-inline: 4px 20px; } }
+.productos .n { font-family: var(--f-dato); font-size: 12px; color: var(--tinta-2); grid-row: span 2; padding-top: 4px; }
+.productos h3 { font-family: var(--f-display); font-weight: 800; font-stretch: 100%; font-size: 1.2rem; margin: 0; }
+.productos p { margin: 0; color: var(--tinta-2); font-size: 15.5px; }
+.medida { font-family: var(--f-dato); font-size: 13px; color: var(--tinta); white-space: nowrap; }
+
+/* Cómo pedir */
+.pasos { list-style: none; margin: 0; padding: 0; display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); counter-reset: paso; }
+.pasos li { counter-increment: paso; display: grid; gap: 6px; min-width: 0; }
+.pasos li::before { content: counter(paso); font-family: var(--f-display); font-weight: 900; font-stretch: 125%; font-size: 2.6rem; line-height: 1; color: transparent; -webkit-text-stroke: 1.5px var(--tinta); }
+.pasos b { font-size: 1.1rem; }
+.pasos span { color: var(--tinta-2); }
+
+/* Visítenos */
+.visita { display: grid; gap: 28px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); align-items: start; }
+.dato dt { font-family: var(--f-dato); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--tinta-2); margin-top: 16px; }
+.dato dt:first-child { margin-top: 0; }
+.dato dd { margin: 4px 0 0; font-size: 1.1rem; }
+p.dato-titulo { font-family: var(--f-dato); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--tinta-2); margin: 0 0 6px; }
+table.horario { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+table.horario td { padding: 10px 0; border-bottom: 1px solid var(--filete); }
+table.horario td + td { text-align: right; font-family: var(--f-dato); font-size: 15px; }
+table.horario tr.cerrado td { color: var(--tinta-2); }
+.nota { color: var(--tinta-2); font-size: 14.5px; margin-top: 12px; }
+
+footer { border-top: 1px solid var(--filete); padding-block: 22px 32px; display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; color: var(--tinta-2); font-size: 14.5px; }
+</style>
+</head>
+<body>
+<div class="pliego">
+  <header class="barra">
+    <a class="marca" href="#inicio"><span class="registro" aria-hidden="true"><i></i></span>Editora Ortega</a>
+    <nav aria-label="Secciones">
+      <a href="#productos">Productos</a>
+      <a href="#como-pedir">Cómo pedir</a>
+      <a href="#visitenos">Visítenos</a>
+    </nav>
+  </header>
+
+  <main id="inicio">
+    <div class="portada">
+      <div class="etiqueta"><span class="tintas" aria-hidden="true"><i style="background:var(--c)"></i><i style="background:var(--m)"></i><i style="background:var(--y)"></i><i style="background:var(--tinta)"></i></span>Imprenta en Santo Domingo</div>
+      <h1>Su negocio, bien <span class="corrido" data-texto="impreso">impreso</span>.</h1>
+      <p class="bajada">Tarjetas de presentación, volantes, brochures, stickers, talonarios, bolsas y banners. Cotice por WhatsApp y reciba el precio en el momento.</p>
+      <div class="acciones">
+        <a class="boton" href="https://wa.me/18297422974?text=Hola%2C%20vengo%20de%20la%20p%C3%A1gina%20web" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.6.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3Z"/></svg>
+          Cotizar por WhatsApp
+        </a>
+        <span class="numero">+1 829 742 2974</span>
+      </div>
+    </div>
+
+    <section class="hoja" id="productos" aria-labelledby="t-productos">
+      <h2 id="t-productos">Productos</h2>
+      <p class="intro">Los más pedidos. Si busca algo que no está aquí, escríbanos y le cotizamos.</p>
+      <ul class="productos">
+        <li><span class="n">01</span><h3>Tarjetas de presentación</h3><p>Cartonite u opalina, de uno o ambos lados, con o sin laminado. Desde 250 unidades.</p></li>
+        <li><span class="n">02</span><h3>Volantes</h3><p><span class="medida">5.5 × 8.5″</span> en papel satinado, de uno o ambos lados. Desde 100 unidades.</p></li>
+        <li><span class="n">03</span><h3>Brochures</h3><p><span class="medida">8.5 × 11″</span> en satinado o cartonite, díptico o tríptico, con o sin laminado.</p></li>
+        <li><span class="n">04</span><h3>Stickers</h3><p><span class="medida">2 × 2″</span> o <span class="medida">3 × 3″</span>. Desde 250 unidades.</p></li>
+        <li><span class="n">05</span><h3>Tags</h3><p><span class="medida">2 × 3″</span>, para ropa, regalos y productos. Desde 100 unidades.</p></li>
+        <li><span class="n">06</span><h3>Talonarios</h3><p>Media carta, original y copia, de 50 juegos. A un color o full color.</p></li>
+        <li><span class="n">07</span><h3>Bolsas personalizadas</h3><p>Tres tamaños, de <span class="medida">4.25 × 2.5 × 5.5″</span> a <span class="medida">12 × 4 × 8″</span>. Desde 50 unidades.</p></li>
+        <li><span class="n">08</span><h3>Banner araña</h3><p><span class="medida">2 × 5</span> o <span class="medida">3 × 6 pies</span>, para ferias, eventos y vitrinas.</p></li>
+        <li><span class="n">09</span><h3>Roll Up</h3><p><span class="medida">31 × 80″</span>, para presentaciones y puntos de venta.</p></li>
+      </ul>
+    </section>
+
+    <section class="hoja" id="como-pedir" aria-labelledby="t-pedir">
+      <h2 id="t-pedir">Cómo pedir</h2>
+      <p class="intro">Todo se hace por WhatsApp, con el mismo número.</p>
+      <ol class="pasos">
+        <li><b>Escríbanos</b><span>Díganos qué producto necesita y la cantidad.</span></li>
+        <li><b>Reciba el precio</b><span>Le damos el precio de referencia al instante, a cualquier hora.</span></li>
+        <li><b>Confirme su pedido</b><span>Le atendemos en horario de oficina para el diseño, el pago y la entrega.</span></li>
+      </ol>
+    </section>
+
+    <section class="hoja" id="visitenos" aria-labelledby="t-visita">
+      <h2 id="t-visita">Visítenos</h2>
+      <div class="visita">
+        <dl class="dato">
+          <dt>Dirección</dt>
+          <dd>C. La Negrita #43<br>Santo Domingo, República Dominicana</dd>
+          <dd><a class="secundario" href="https://www.google.com/maps/search/?api=1&amp;query=Editora%20Ortega&amp;query_place_id=ChIJt7J72UqJr44RKKMZT5BMBgw" target="_blank" rel="noopener">Ver en Google Maps</a></dd>
+          <dt>WhatsApp</dt>
+          <dd><a class="secundario" href="https://wa.me/18297422974?text=Hola%2C%20vengo%20de%20la%20p%C3%A1gina%20web" target="_blank" rel="noopener">+1 829 742 2974</a></dd>
+        </dl>
+        <div>
+          <p class="dato-titulo" id="t-horario">Horario</p>
+          <table class="horario" aria-labelledby="t-horario">
+            <tbody>
+              <tr><td>Lunes a viernes</td><td>9:00 a. m. – 5:30 p. m.</td></tr>
+              <tr><td>Sábado</td><td>9:00 a. m. – 12:00 m.</td></tr>
+              <tr class="cerrado"><td>Domingo</td><td>Cerrado</td></tr>
+            </tbody>
+          </table>
+          <p class="nota">Cerramos los días feriados.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© 2026 Editora Ortega · Santo Domingo</span>
+    <span>editoraortega.com</span>
+  </footer>
+</div>
+
+</body>
+</html>
